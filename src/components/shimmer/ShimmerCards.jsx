@@ -1,11 +1,10 @@
 import React from 'react';
 import ShimmerCard from './ShimmerCard';
-import './shimmer.css';
 
 const ShimmerCards = () => {
     return (
         <>
-            <div className='shimmer-container'>
+            <div className='flex flex-wrap w-[85%] my-[2px] mx-auto'>
                 <ShimmerCard />
                 <ShimmerCard />
                 <ShimmerCard />

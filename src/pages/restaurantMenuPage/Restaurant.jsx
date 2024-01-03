@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
-import './restaurant.css';
 import { menu_api } from "../../utils/constants";
 import Menu from "../../components/MenuItems/Menu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,37 +23,41 @@ const Restaurant = () => {
 
     const offers = resInfo[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards; // array of offers
 
-    const menuItems = offers.filter((offer) => {
-        return 'title' in offer?.card?.card && 'itemCards' in offer?.card?.card;
-    });
+    let menuItems = [];
+    if(offers !== undefined){
+        menuItems = offers.filter((offer) => {
+            return 'title' in offer?.card?.card && 'itemCards' in offer?.card?.card;
+        });
+    }
 
     return (
         <>
-            <div className="menu-container">
-                <div className="main-info">
-                    <div className="res-data">
-                        <h1>{res?.name}</h1>
-                        <p>{(res?.cuisines).join(", ")}</p>
-                        <p>{res?.areaName}, {res?.sla?.lastMileTravelString}</p>
-                        <p>{res?.feeDetails?.message}</p>
+            <div className="md:flex flex-wrap bg-white md:w-[88%] my-[5px] mx-auto">
+                <div className="my-8 mx-48 md:w-full md:flex flex-wrap justify-between items-center">
+                    <div>
+                        <h1 className="text-4xl font-bold pt-1">{res?.name}</h1>
+                        <p className="pt-1">{(res?.cuisines).join(", ")}</p>
+                        <p className="pt-1">{res?.areaName}, {res?.sla?.lastMileTravelString}</p>
+                        <p className="pt-1">{res?.feeDetails?.message}</p>
                     </div>
-                    <div className="res-analytics">
-                        <p><FontAwesomeIcon icon={faStar} /> {res?.avgRating}</p>
+                    <div className="res-analytics p-2 border border-solid border-[black] rounded">
+                        <p className="mb-2 text-center"><FontAwesomeIcon color="green" icon={faStar} /> {res?.avgRating}</p>
                         <hr />
-                        <p>{res?.totalRatingsString}</p>
+                        <p className="mt-2">{res?.totalRatingsString}</p>
                     </div>
                 </div>
-                <hr className="separator" />
-                <div className="extra-info">
-                    <p><FontAwesomeIcon icon={faClock} /> {res?.sla?.maxDeliveryTime} MINS</p>
+                <hr className="w-full mx-48" />
+
+                <div className="mx-48 my-8 flex w-full">
+                    <p className="pr-7"><FontAwesomeIcon icon={faClock} /> {res?.sla?.maxDeliveryTime} MINS</p>
                     <p><FontAwesomeIcon icon={faMoneyCheck} /> {res?.costForTwoMessage}</p>
                 </div>
-                <hr className="separator" />
+                <hr className="w-full mx-48" />
 
-                <div className="menu-items">
+                <div className="my-8 mx-48 w-full">
                     {
-                        menuItems.map((item) => (
-                            <Menu title={item?.card?.card?.title} data={item?.card?.card?.itemCards} />
+                        menuItems.length > 0 && menuItems.map((item, i) => (
+                            <Menu key={i} title={item?.card?.card?.title} data={item?.card?.card?.itemCards} />
                         ))
                     }
                 </div>

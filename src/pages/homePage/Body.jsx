@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import RestaurantCard from '../../components/restaurantCard/RestaurantCard.jsx';
-import './body.css';
 import { SWIGGY_API, linkStyle } from "../../utils/constants.js";
 import ShimmerCards from '../../components/shimmer/ShimmerCards.jsx';
 import { Link } from 'react-router-dom';
@@ -37,14 +36,14 @@ const Body = () => {
 
     return (
         <main className='body'>
-            <div className='filter'>
-                <div className='search'>
-                    <input type="text" name="search-field" id="searchField" value={searchVal}   onChange={(e) => setSearchVal(e.target.value)} />
+            <div className='flex'>
+                <div className='my-6 mr-4 ml-[6.5rem]'>
+                    <input className='p-2 text-xl border border-solid border-black rounded' type="text" name="search-field" id="searchField" value={searchVal}   onChange={(e) => setSearchVal(e.target.value)} />
                     <label htmlFor="searchField">
-                        <button className='search-btn' onClick={searchFilter}>Search</button>
+                        <button className='p-2 ml-1 text-xl bg-[#04AA6D] text-white rounded' onClick={searchFilter}>Search</button>
                     </label>
                 </div>
-                <button className='filter-btn' onClick={filterRestaurantHandler}>
+                <button className='p-2 my-6 mx-4 rounded bg-[#0b88e1] text-white text-xl' onClick={filterRestaurantHandler}>
                     Top Rated Restaurants
                 </button>
             </div>
@@ -54,7 +53,7 @@ const Body = () => {
                         <ShimmerCards />
                     </>
                 ) : (
-                <div className="res-container">
+                <div className="flex flex-wrap w-[85%] mx-auto">
                     {filterResList?.map((res) => (
                         <Link key={res?.info?.id} to={`/restaurant/${res?.info?.id}`} style={linkStyle}>
                             <RestaurantCard resName={res?.info?.name} rating={res?.info?.avgRating} eta={res?.info?.sla?.deliveryTime} cuisines={res?.info?.cuisines} location={`${res?.info?.locality}, ${res?.info?.areaName}`} img_id={res?.info?.cloudinaryImageId} price={res?.info?.costForTwo} />
