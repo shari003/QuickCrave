@@ -8,6 +8,7 @@ import { faClock, faMoneyCheck, faStar } from '@fortawesome/free-solid-svg-icons
 const Restaurant = () => {
     const params = useParams();
     const [resInfo, setResInfo] = useState([]);
+    const [showIndex, setShowIndex] = useState(-1);
 
     useEffect(() => {
         const fetchResData = async() => {
@@ -28,6 +29,18 @@ const Restaurant = () => {
         menuItems = offers.filter((offer) => {
             return 'title' in offer?.card?.card && 'itemCards' in offer?.card?.card;
         });
+    }
+
+    const handleSetShowAccordion = (idx) => {
+        if(idx !== showIndex && showIndex === -1){ // open accordion for first time
+            setShowIndex(idx);
+        }
+        else if(idx === showIndex){ // close accordion
+            setShowIndex(-1);
+        }
+        else { // show other accordion
+            setShowIndex(idx);
+        }
     }
 
     return (
@@ -57,7 +70,7 @@ const Restaurant = () => {
                 <div className="my-8 mx-48 w-full">
                     {
                         menuItems.length > 0 && menuItems.map((item, i) => (
-                            <Menu key={i} title={item?.card?.card?.title} data={item?.card?.card?.itemCards} />
+                            <Menu key={i} idx={i} title={item?.card?.card?.title} data={item?.card?.card?.itemCards} showAccordion={i === showIndex && true} setShowAccordion={(idx) => handleSetShowAccordion(idx)} />
                         ))
                     }
                 </div>
