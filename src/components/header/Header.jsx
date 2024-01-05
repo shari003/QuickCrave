@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from "react-redux";
 import logo from '../../public/assets/cooking64.png';
 import { Link, useLocation } from 'react-router-dom';
 import { linkStyle } from '../../utils/constants';
@@ -7,6 +8,8 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     const loc = useLocation();
+    const cart = useSelector(store => store.cart);
+    const cartItems = cart.items.reduce((acc, curr) => {return acc + curr.count}, 0);
 
     const styleLi = (pathName) => {
         return {textDecoration: 'none', color: 'black', borderBottom: loc.pathname === pathName ? '2px solid red' : 'none'};
@@ -39,6 +42,7 @@ const Header = () => {
                     <Link className='p-[9px] m-5 text-xl' to={'/cart'} style={linkStyle}>
                         <li>
                             <FontAwesomeIcon icon={faCartShopping} />
+                            ({cartItems})
                         </li>
                     </Link>
                 </ul>

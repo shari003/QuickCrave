@@ -16,7 +16,8 @@ const Body = () => {
                 method: "GET"
             });
             const data = await response.json();
-            const restaurants = data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+            // The reference to the cards array changes time to time.
+            const restaurants = data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
             setResList(restaurants);
             setFilterResList(restaurants);
         }

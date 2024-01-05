@@ -8,6 +8,7 @@ const Menu = ({idx, title, data, showAccordion, setShowAccordion}) => {
     const handleAccordionClick = (ind) => {
         setShowAccordion(ind);
     }
+
     return (
         <div className='my-7'>
             <h2 className='text-2xl font-semibold flex justify-between cursor-pointer' onClick={() => handleAccordionClick(idx)}>
@@ -18,7 +19,7 @@ const Menu = ({idx, title, data, showAccordion, setShowAccordion}) => {
             </h2>
             {showAccordion && 
                 data.map((item) => (
-                    <MenuItems key={item?.card?.info?.id} name={item?.card?.info?.name} price={item?.card?.info?.price || item?.card?.info?.defaultPrice} img_id={item?.card?.info?.imageId} description={item?.card?.info?.description} veg_classifier={item?.card?.info?.itemAttribute?.vegClassifier} />
+                    <MenuItems key={item?.card?.info?.id} id={item?.card?.info?.id} name={item?.card?.info?.name} price={item?.card?.info?.price || item?.card?.info?.defaultPrice} img_id={item?.card?.info?.imageId} description={item?.card?.info?.description} veg_classifier={item?.card?.info?.itemAttribute?.vegClassifier} />
                 ))
             }
             <div className='mt-4 h-4 bg-[#f1f1f6]'>
