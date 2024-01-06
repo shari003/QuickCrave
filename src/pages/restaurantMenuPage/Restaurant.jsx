@@ -8,7 +8,7 @@ import { faClock, faMoneyCheck, faStar } from '@fortawesome/free-solid-svg-icons
 const Restaurant = () => {
     const params = useParams();
     const [resInfo, setResInfo] = useState([]);
-    const [showIndex, setShowIndex] = useState(-1);
+    const [showIndex, setShowIndex] = useState(0);
 
     useEffect(() => {
         const fetchResData = async() => {

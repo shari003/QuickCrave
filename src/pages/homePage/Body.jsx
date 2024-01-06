@@ -36,7 +36,7 @@ const Body = () => {
     }
 
     return (
-        <main className='body'>
+        <main className='pb-20'>
             <div className='flex'>
                 <div className='my-6 mr-4 ml-[6.5rem]'>
                     <input className='p-2 text-xl border border-solid border-black rounded' type="text" name="search-field" id="searchField" value={searchVal}   onChange={(e) => setSearchVal(e.target.value)} />

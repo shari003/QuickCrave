@@ -18,8 +18,9 @@ const Header = () => {
     return (
         <main className='flex justify-between px-8 bg-[#F6B17A]'>
             <div className='logo-container'>
-                <Link to={'/'}>
+                <Link className='flex items-center' to={'/'}>
                     <img className='m-[9px]' src={logo} alt="main_logo" />
+                    <h1 className='ml-4 mt-4 text-3xl font-bold logo-heading'>QuickCrave</h1>
                 </Link>
             </div>
             <div>
@@ -34,11 +35,11 @@ const Header = () => {
                             About Us
                         </li>
                     </Link>
-                    <Link className='p-[9px] m-5 text-xl hover:duration-300 hover:bg-white hover:rounded hover:border-b-0 hover:text-red' to={'/contact'} style={styleLi('/contact')}>
+                    {/* <Link className='p-[9px] m-5 text-xl hover:duration-300 hover:bg-white hover:rounded hover:border-b-0 hover:text-red' to={'/contact'} style={styleLi('/contact')}>
                         <li style={styleLi('/contact')}>
                             Contact Us
                         </li>
-                    </Link>
+                    </Link> */}
                     <Link className='p-[9px] m-5 text-xl' to={'/cart'} style={linkStyle}>
                         <li>
                             <FontAwesomeIcon icon={faCartShopping} />

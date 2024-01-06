@@ -9,7 +9,6 @@ const Cart = () => {
     const dispatch = useDispatch();
 
     const total = cartItems.reduce((acc, curr) => {return acc + (curr.price/100)*(curr.count)}, 0);
-    console.log(total);
 
     return (
         <>

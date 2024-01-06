@@ -18,8 +18,8 @@ const RestaurantCard = ({resName, rating, eta, cuisines, price, location, img_id
                     <span className='pl-1'>{eta} mins</span>
                 </p>
                 <h4 className='mt-2'>{price}</h4>
-                <p style={{fontWeight: "500"}} className='mt-2'><FontAwesomeIcon icon={faBowlFood} /> {cuisines.join(", ")}</p>
-                <h4 className='mt-2'><FontAwesomeIcon style={{color: 'red'}} icon={faMapPin} /> {location}</h4>
+                <p style={{fontWeight: "500"}} className='mt-2'><FontAwesomeIcon icon={faBowlFood} /> {cuisines.join(", ").slice(0,30) + '...'}</p>
+                <h4 className='mt-2'><FontAwesomeIcon style={{color: 'red'}} icon={faMapPin} /> {location.slice(0,25) + '...'}</h4>
             </div>
         </div>
     )
