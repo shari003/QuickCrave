@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class UserClass extends React.Component{
 
@@ -9,11 +10,13 @@ class UserClass extends React.Component{
     render(){
         const {name, address, designation} = this.props;
         return (
-            <div>
-                <p>Name: {name}</p>
-                <p>Address: {address}</p>
-                <p>Designation: {designation}</p>
-            </div>
+            <main className='flex justify-center items-center'>
+                <div className='my-2 font-black text-xl'>
+                    <p>Name: {name}</p>
+                    <p>Address: {address}</p>
+                    <p>Website: <Link className='text-blue-800 underline' to={'https://shri-dev.vercel.app'}>Portfolio</Link></p>
+                </div>
+            </main>
         )
     }
 }
@@ -28,4 +31,4 @@ class UserClass extends React.Component{
 //     )
 // }
 
-export default UserClass
+export default UserClass;
