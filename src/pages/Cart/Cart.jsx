@@ -12,7 +12,7 @@ const Cart = () => {
 
     return (
         <>
-           <main className='w-[85%] mx-auto my-6'>
+           <main className='w-[85%] mx-auto my-6 pb-20'>
                 <h1 className='text-2xl font-bold text-center'>Your Cart</h1>
                 {cartItems.length > 0 ? (
                     <>
