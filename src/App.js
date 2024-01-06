@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import "./App.css";
 import './index.css'
@@ -28,6 +28,7 @@ const AppLayout = () => {
                             <Route path="/restaurant/:resId" element={<Suspense fallback={<h1>Loading...</h1>}><Restaurant /></Suspense>} />
                             <Route path="/cart" element={<Suspense fallback={<h1>Loading...</h1>}><Cart /></Suspense>} />            
                         </Route>
+                        <Route path="*" element={<Navigate to={'/'} replace={true} />} />
                     </Routes>
                 </BrowserRouter>
             </Provider>
