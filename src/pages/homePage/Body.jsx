@@ -3,21 +3,42 @@ import RestaurantCard from '../../components/restaurantCard/RestaurantCard.jsx';
 import { SWIGGY_API, linkStyle } from "../../utils/constants.js";
 import ShimmerCards from '../../components/shimmer/ShimmerCards.jsx';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCoords } from '../../utils/store/slices/globalSlice.js';
 
 const Body = () => { 
     const [resList, setResList] = useState([]);
     const [filterResList, setFilterResList] = useState([]);
     const [searchVal, setSearchVal] = useState('');
+    const dispatch = useDispatch();
+    const coords = useSelector(store => store.global.coords);
 
     useEffect(() => {
+
+        function getUserLocation() {
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const {latitude, longitude} = position.coords;
+                    dispatch(setCoords({latitude: latitude.toString(), longitude: longitude.toString()}));
+                }, (error) => {
+                    alert(`Error getting user's location: ${error.message}`)
+                })
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        getUserLocation();
+
         // fetching real time data from the API and setting to the state variable.
         const fetchData = async() => {
-            const response = await fetch(SWIGGY_API, {
+            const response = await fetch(SWIGGY_API(coords.lat, coords.lng), {
                 method: "GET"
             });
             const data = await response.json();
+
             // The reference to the cards array changes time to time.
-            const restaurants = data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+            const restaurants = data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
             setResList(restaurants);
             setFilterResList(restaurants);
         }

@@ -1,18 +1,20 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
-import { menu_api } from "../../utils/constants";
+import { SWIGGY_RES_MENU_API } from "../../utils/constants";
 import Menu from "../../components/MenuItems/Menu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faMoneyCheck, faStar } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from "react-redux";
 
 const Restaurant = () => {
     const params = useParams();
     const [resInfo, setResInfo] = useState([]);
     const [showIndex, setShowIndex] = useState(0);
+    const coords = useSelector(store => store.global.coords);
 
     useEffect(() => {
         const fetchResData = async() => {
-            const response = await fetch(menu_api(params.resId));
+            const response = await fetch(SWIGGY_RES_MENU_API(params.resId, coords.lat, coords.lng));
             const data = await response.json();
             setResInfo(data?.data?.cards);
         }   
