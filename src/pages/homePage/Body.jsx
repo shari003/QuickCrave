@@ -44,7 +44,7 @@ const Body = () => {
         }
 
         fetchData();
-    }, []);
+    }, [coords]);
 
     const filterRestaurantHandler = () => {
         const filteredRestaurants = resList.filter((res) => res?.info?.avgRating > 4);
