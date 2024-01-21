@@ -10,26 +10,14 @@ const Body = () => {
     const [resList, setResList] = useState([]);
     const [filterResList, setFilterResList] = useState([]);
     const [searchVal, setSearchVal] = useState('');
-    const dispatch = useDispatch();
     const coords = useSelector(store => store.global.coords);
+    const dispatch = useDispatch();
+    const [location, setLocation] = useState({
+        lat: coords.lat,
+        lng: coords.lng
+    });
 
     useEffect(() => {
-
-        function getUserLocation() {
-            if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition((position) => {
-                    const {latitude, longitude} = position.coords;
-                    dispatch(setCoords({latitude: latitude.toString(), longitude: longitude.toString()}));
-                }, (error) => {
-                    alert(`Error getting user's location: ${error.message}`)
-                })
-            } else {
-                alert('Geolocation is not supported by this browser.');
-            }
-        }
-
-        getUserLocation();
-
         // fetching real time data from the API and setting to the state variable.
         const fetchData = async() => {
             const response = await fetch(SWIGGY_API(coords.lat, coords.lng), {
@@ -78,7 +66,7 @@ const Body = () => {
                 <div className="flex flex-wrap w-[85%] mx-auto">
                     {filterResList?.map((res) => (
                         <Link key={res?.info?.id} to={`/restaurant/${res?.info?.id}`} style={linkStyle}>
-                            <RestaurantCard resName={res?.info?.name} rating={res?.info?.avgRating} eta={res?.info?.sla?.deliveryTime} cuisines={res?.info?.cuisines} location={`${res?.info?.locality}, ${res?.info?.areaName}`} img_id={res?.info?.cloudinaryImageId} price={res?.info?.costForTwo} />
+                            <RestaurantCard resName={res?.info?.name} rating={res?.info?.avgRating} eta={res?.info?.sla?.deliveryTime} cuisines={res?.info?.cuisines} locality={res?.info?.locality} areaName={res?.info?.areaName} img_id={res?.info?.cloudinaryImageId} price={res?.info?.costForTwo} />
                         </Link>
                     ))}
                 </div>

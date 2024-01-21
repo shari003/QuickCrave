@@ -4,7 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faMapPin, faBowlFood } from '@fortawesome/free-solid-svg-icons';
 
 
-const RestaurantCard = ({resName, rating, eta, cuisines, price, location, img_id}) => {
+const RestaurantCard = ({resName, rating, eta, cuisines, price, locality, areaName, img_id}) => {
+    let location = "";
+    if(locality === undefined){
+        location = areaName;
+    } else {
+        location = `${locality}, ${areaName}`
+    }
     return (
         <div className='bg-white rounded-md border border-solid border-white cursor-pointer p-1 m-1 w-[310px] duration-500 hover:shadow-3xl'>
             <div className='p-1'>
