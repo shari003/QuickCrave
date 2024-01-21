@@ -6,7 +6,6 @@ import { linkStyle } from '../../utils/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { setCoords } from '../../utils/store/slices/globalSlice.js';
-import { useGeolocated } from "react-geolocated";
 
 const Header = () => {
     const loc = useLocation();
